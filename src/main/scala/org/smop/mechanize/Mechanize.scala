@@ -3,18 +3,21 @@
   */
 package org.smop.mechanize
 
-import org.apache.http.impl.client.DefaultHttpClient
-import org.apache.http.client.methods.{HttpUriRequest, HttpGet}
+import scala.language.postfixOps
+import org.apache.http.impl.client.HttpClientBuilder
+import org.apache.http.client.methods.{HttpGet, HttpUriRequest}
 import org.apache.http.{HttpEntity, HttpResponse}
 import java.io.InputStream
+
 import xml.Node
 import java.net.URI
+
 import org.xml.sax.InputSource
 
 /** The do-it-all class.
   * @param agent the HTTP User Agent */
 class Mechanize(var agent: String = "org.smop.mechanize/0.1") {
-  protected val _httpclient = new DefaultHttpClient
+  protected val _httpclient =  HttpClientBuilder.create().build()
 
   protected var _request: HttpUriRequest = null
   protected var _uri: URI = null
